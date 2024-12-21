@@ -2,14 +2,31 @@ use regex::Regex;
 use std::collections::HashMap;
 use std::fs::read_to_string;
 
-pub fn main() {
-    //     let input = "3   4
-    // 4   3
-    // 2   5
-    // 1   3
-    // 3   9
-    // 3   3";
+#[cfg(test)]
+mod tests {
+    use super::*;
 
+    const TEST_INPUT: &str = "3   4
+4   3
+2   5
+1   3
+3   9
+3   3";
+
+    #[test]
+    fn test_differences() {
+        let (left, right) = get_sorted_digit_lists(TEST_INPUT);
+        assert_eq!(get_differences(&left, &right), 11);
+    }
+
+    #[test]
+    fn test_similarities() {
+        let (left, right) = get_sorted_digit_lists(TEST_INPUT);
+        assert_eq!(get_similarities(&left, &right), 31);
+    }
+}
+
+pub fn main() {
     let input = read_to_string("input.txt").expect("Could not read input");
     let (left, right) = get_sorted_digit_lists(&input);
 
