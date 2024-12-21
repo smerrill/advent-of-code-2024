@@ -26,13 +26,7 @@ mod tests {
 pub fn main() {
     let input = read_to_string("input.txt").expect("Could not read input");
     let lists = get_number_lists(&input);
-    let safe_reports_count = lists
-        .iter()
-        .map(|l| is_safe(l))
-        .collect::<Vec<bool>>()
-        .iter()
-        .filter(|b| **b)
-        .count();
+    let safe_reports_count = lists.iter().map(|l| is_safe(l)).filter(|b| *b).count();
 
     println!("Safe reports count: {}", safe_reports_count);
 }
