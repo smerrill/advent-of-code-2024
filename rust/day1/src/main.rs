@@ -17,10 +17,7 @@ pub fn main() {
         "Difference: {}",
         get_differences(left.clone(), right.clone())
     );
-    println!(
-        "Similarity {}",
-        get_similarities(left.clone(), right.clone())
-    );
+    println!("Similarity {}", get_similarities(left, right));
 }
 
 fn get_sorted_digit_lists(input: &str) -> (Vec<i32>, Vec<i32>) {
