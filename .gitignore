@@ -182,4 +182,4 @@ ts/day*.txt
 # Added by cargo
 
 **/target
-
+rust/**/input.txt

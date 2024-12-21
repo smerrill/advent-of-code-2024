@@ -13,19 +13,14 @@ pub fn main() {
     let input = read_to_string("input.txt").expect("Could not read input");
     let (left, right) = get_sorted_digit_lists(&input);
 
-    println!(
-        "Difference: {}",
-        get_differences(left.clone(), right.clone())
-    );
-    println!("Similarity {}", get_similarities(left, right));
+    println!("Difference: {}", get_differences(&left, &right));
+    println!("Similarity {}", get_similarities(&left, &right));
 }
 
 fn get_sorted_digit_lists(input: &str) -> (Vec<i32>, Vec<i32>) {
     let lines = input.lines().collect::<Vec<&str>>();
-    let (mut left, mut right): (Vec<i32>, Vec<i32>) = lines
-        .into_iter()
-        .filter_map(|s| get_digit_tuples(s))
-        .unzip();
+    let (mut left, mut right): (Vec<i32>, Vec<i32>) =
+        lines.iter().filter_map(|s| get_digit_tuples(s)).unzip();
     left.sort();
     right.sort();
 
@@ -46,22 +41,22 @@ fn get_digit_tuples(s: &str) -> Option<(i32, i32)> {
     return Some((first_number, second_number));
 }
 
-fn get_differences(left: Vec<i32>, right: Vec<i32>) -> i32 {
+fn get_differences(left: &Vec<i32>, right: &Vec<i32>) -> i32 {
     return left
-        .into_iter()
-        .zip(right.into_iter())
+        .iter()
+        .zip(right.iter())
         .map(|(l, r)| (l - r).abs())
         .sum::<i32>();
 }
 
-fn get_similarities(left: Vec<i32>, right: Vec<i32>) -> i32 {
+fn get_similarities(left: &Vec<i32>, right: &Vec<i32>) -> i32 {
     let mut right_occurrences: HashMap<i32, i32> = HashMap::new();
-    right.into_iter().for_each(|k| {
-        let occurrence_count = right_occurrences.entry(k).or_insert(0);
+    right.iter().for_each(|k| {
+        let occurrence_count = right_occurrences.entry(*k).or_insert(0);
         *occurrence_count += 1;
     });
     return left
-        .into_iter()
+        .iter()
         .map(|k| right_occurrences.get(&k).or(Some(&0)).unwrap() * k)
         .sum::<i32>();
 }
