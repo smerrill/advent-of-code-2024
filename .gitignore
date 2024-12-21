@@ -177,3 +177,9 @@ dist
 ## AoC 2024 Rules
 
 ts/day*.txt
+
+
+# Added by cargo
+
+**/target
+
