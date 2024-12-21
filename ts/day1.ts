@@ -24,7 +24,7 @@ export const calculateDifferences = (listsText: string): number => {
 	return sum(left.map((leftValue, idx) => Math.abs(right[idx] - leftValue)));
 };
 
-export const calculateSimilarities = (listsText: string) => {
+export const calculateSimilarities = (listsText: string): number => {
 	const [left, right] = getParsedLists(listsText);
 
 	const rightOccurences: Record<number, number> = {};
